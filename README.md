@@ -224,6 +224,19 @@ deploy.
 
 ---
 
+## Operations
+
+For step-by-step incident response, troubleshooting, and maintenance procedures, see the [Operations Runbook](docs/runbook.md):
+
+- **[Indexer Lag](docs/runbook.md#1-indexer-lag)**: Diagnose RPC rate limits, worker bottlenecks, and lag recovery.
+- **[DLQ Drain](docs/runbook.md#2-dead-letter-queue-dlq-drain)**: Inspect and requeue dead-lettered events from `failed_events`.
+- **[Backup Restore](docs/runbook.md#3-backup-and-disaster-recovery-restore)**: Point-In-Time-Recovery (PITR) via WAL replay and logical restores (`scripts/restore.sh`, `scripts/backup.sh`).
+- **[Key Rotation](docs/runbook.md#4-key-and-secret-rotation)**: Zero-downtime rotation of API keys, webhook signing secrets, and server environment secrets.
+
+See also [`docs/metrics.md`](docs/metrics.md) for Prometheus metrics and alerting rules, [`docs/backups.md`](docs/backups.md) for backup configurations, and [`docs/indexer.md`](docs/indexer.md) for indexer options.
+
+---
+
 ## Tech stack
 
 | Layer             | Technology                                                                                                                         |
@@ -265,6 +278,7 @@ sorolens/
     terraform/    Self-hosting Terraform modules (AWS; see docs/self-hosting/aws.md)
     pulumi/       Self-hosting Pulumi (TypeScript) components, mirroring terraform/
   docs/
+    runbook.md    Incident response & operations runbook (lag, DLQ, restore, key rotation)
     screenshots/  Screenshot placeholders
 ```
 
