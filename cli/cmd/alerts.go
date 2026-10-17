@@ -14,15 +14,21 @@ var alertsCmd = &cobra.Command{
 	Short: "View and manage watchdog alerts",
 	Long: `alerts commands allow you to query and inspect alerts emitted by the
 Sorolens watchdog system for monitored contracts.`,
+	Example: `  # List all recent alerts
+  sorolens alerts list
+
+  # Filter alerts by severity
+  sorolens alerts list --severity critical
+
+  # Output in machine-readable JSON format
+  sorolens alerts list --json`,
 }
 
 var alertsListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List watchdog alerts",
-	Long: `List watchdog alerts across monitored contracts, optionally filtered by severity.
-
-Examples:
-  # List recent alerts
+	Long: `List watchdog alerts across monitored contracts, optionally filtered by severity.`,
+	Example: `  # List recent alerts
   sorolens alerts list
 
   # Filter by severity

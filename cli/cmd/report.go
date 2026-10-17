@@ -17,10 +17,8 @@ var reportCmd = &cobra.Command{
 tracked contract, derived from watchdog health checks and alerts.
 
 Validates the reporting month format (YYYY-MM). When omitted, the current UTC
-month is used.
-
-Examples:
-  # View report for the current month
+month is used.`,
+	Example: `  # View report for the current month
   sorolens report CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
   # View report for a specific month

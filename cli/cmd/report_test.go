@@ -122,3 +122,19 @@ func TestReportCommandErrorNon2xx(t *testing.T) {
 		t.Fatal("expected error, got nil")
 	}
 }
+
+func TestReportHelp(t *testing.T) {
+	rootCmd.SetArgs([]string{"report", "--help"})
+	out, err := captureOutput(t, func() error {
+		return rootCmd.Execute()
+	})
+	if err != nil {
+		t.Fatalf("expected nil error, got %v", err)
+	}
+	if !strings.Contains(out, "monthly service-level agreement") {
+		t.Errorf("output missing long description: %s", out)
+	}
+	if !strings.Contains(out, "--month string") {
+		t.Errorf("output missing --month flag description: %s", out)
+	}
+}

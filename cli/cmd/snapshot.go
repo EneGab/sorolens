@@ -16,10 +16,8 @@ var snapshotCmd = &cobra.Command{
 	Long: `Display a snapshot of a contract's storage entries and state.
 
 By default, fetches the current state snapshot export. Supply --ledger to view
-a historical storage snapshot as of a specific ledger sequence number.
-
-Examples:
-  # View current contract snapshot
+a historical storage snapshot as of a specific ledger sequence number.`,
+	Example: `  # View current contract snapshot
   sorolens snapshot CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
   # View snapshot at a historical ledger
@@ -36,6 +34,13 @@ var snapshotLedger uint32
 func init() {
 	snapshotCmd.Flags().Uint32Var(&snapshotLedger, "ledger", 0, "Ledger sequence number to snapshot at")
 	rootCmd.AddCommand(snapshotCmd)
+}
+
+func truncateXDR(xdr string) string {
+	if len(xdr) <= 12 {
+		return xdr
+	}
+	return xdr[:6] + "..." + xdr[len(xdr)-6:]
 }
 
 func runSnapshot(cmd *cobra.Command, args []string) error {
@@ -78,7 +83,7 @@ func runSnapshot(cmd *cobra.Command, args []string) error {
 			rows := make([][]string, len(snap.Storage))
 			for i, e := range snap.Storage {
 				rows[i] = []string{
-					shortHash(e.KeyXDR),
+					truncateXDR(e.KeyXDR),
 					e.Durability,
 					strconv.FormatInt(e.LiveUntilLedger, 10),
 				}
@@ -115,7 +120,7 @@ func runSnapshot(cmd *cobra.Command, args []string) error {
 		rows := make([][]string, len(snapExport.Storage))
 		for i, e := range snapExport.Storage {
 			rows[i] = []string{
-				shortHash(e.KeyXDR),
+				truncateXDR(e.KeyXDR),
 				e.Durability,
 				strconv.FormatInt(e.LiveUntilLedger, 10),
 			}

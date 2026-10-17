@@ -148,3 +148,19 @@ func TestAlertsListCommandErrorNon2xx(t *testing.T) {
 		t.Fatal("expected error, got nil")
 	}
 }
+
+func TestAlertsHelp(t *testing.T) {
+	rootCmd.SetArgs([]string{"alerts", "--help"})
+	out, err := captureOutput(t, func() error {
+		return rootCmd.Execute()
+	})
+	if err != nil {
+		t.Fatalf("expected nil error, got %v", err)
+	}
+	if !strings.Contains(out, "alerts commands allow you to query and inspect alerts") {
+		t.Errorf("output missing long description: %s", out)
+	}
+	if !strings.Contains(out, "sorolens alerts list") {
+		t.Errorf("output missing examples: %s", out)
+	}
+}

@@ -160,3 +160,19 @@ func TestSnapshotCommandMissingArgument(t *testing.T) {
 		t.Fatal("expected error when contract-id argument is missing, got nil")
 	}
 }
+
+func TestSnapshotHelp(t *testing.T) {
+	rootCmd.SetArgs([]string{"snapshot", "--help"})
+	out, err := captureOutput(t, func() error {
+		return rootCmd.Execute()
+	})
+	if err != nil {
+		t.Fatalf("expected nil error, got %v", err)
+	}
+	if !strings.Contains(out, "snapshot of a contract's storage entries and state") {
+		t.Errorf("output missing long description: %s", out)
+	}
+	if !strings.Contains(out, "--ledger uint32") {
+		t.Errorf("output missing --ledger flag description: %s", out)
+	}
+}
