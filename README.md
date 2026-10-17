@@ -222,6 +222,10 @@ select this repo, and Railway will pick up `railway.toml` automatically.
 Set the required environment variables in the Variables panel before the first
 deploy.
 
+### Full Deployment Guide
+
+For end-to-end production deployment across managed cloud platforms (**Neon**, **Upstash**, **Vercel**), self-hosted **Docker Compose** stacks, complete environment variable reference, and **Stellar Mainnet** configuration, see the [Deployment Guide](docs/deployment.md).
+
 ---
 
 ## Tech stack
@@ -265,6 +269,7 @@ sorolens/
     terraform/    Self-hosting Terraform modules (AWS; see docs/self-hosting/aws.md)
     pulumi/       Self-hosting Pulumi (TypeScript) components, mirroring terraform/
   docs/
+    deployment.md Deployment guide (Neon, Upstash, Vercel, Docker, Mainnet)
     screenshots/  Screenshot placeholders
 ```
 
